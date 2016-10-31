@@ -1,0 +1,12 @@
+body {
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 10px;
+}
+
+td, th {
+	border: 1px solid green;
+}

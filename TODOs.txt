@@ -1,0 +1,41 @@
+1. Stop display of errors in WAMP.
+2. In the 007-includes part we included a table snippet to our about page.
+Use 009-functions.php pluck functions to display the table more effectively.
+3. Search Web for the PHP library underscore that has its own version of pluck functions.
+4. Search Web for PHP best practices. An example is always escape query strings in links using htmlspecialchars.
+5. PRG pattern in PHP.
+6. Set mail server for WAMP.
+7. Set a dummy mail server to run on windows for local tests.
+8. Steps to login and logout a user.
+9. window.onload to preload JS functions before page load.
+
+
+A. DAO, second-level cache and schema validations
+B. Login/logout a user
+C. Role management
+D. CRUD and batch processing
+E. Reporting, logging, Email
+F. shopping cart, Stock manager, Lateness manager, CMS, Portal and single sign on.
+G. MongoDB advanced
+H. Pagination and sorting
+----------------------------------------------------------------------------------------------------
+I. Drag and Drop
+J. File manipulation
+K. HTML 5 adavanced - local storage, upload and download progress, cache, webworkers and web sockets
+L. Multi-database architecture
+-------------------------------------------------------------------------------------------------------
+M. REST
+N. Encryption
+O. Clustering of servers
+---------------------------------------------------------------------------------------------------------
+P. Composer and repository management
+Q. PHPStorm
+R. Twig, Symfony2 & 3
+S. Lavarel
+T. Elastic search
+U. See the list of technologies in email
+V. Gulp
+
+
+
+
