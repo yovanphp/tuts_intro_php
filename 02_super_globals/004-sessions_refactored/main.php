@@ -1,7 +1,8 @@
 <?php  
 	session_start();
+	require_once("functions.php");
 
-	if(!isset($_SESSION["username"])) {
+	if(!is_logged_in()) {
 		header("Location: login.php");
 		die();
 	}

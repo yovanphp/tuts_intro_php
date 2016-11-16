@@ -8,6 +8,8 @@ Use 009-functions.php pluck functions to display the table more effectively.
 7. Set a dummy mail server to run on windows for local tests.
 8. Steps to login and logout a user.
 9. window.onload to preload JS functions before page load.
+10. Differences and overheads of include, require and require_once methods.
+11. How to comment code and document it.
 
 
 A. DAO, second-level cache and schema validations

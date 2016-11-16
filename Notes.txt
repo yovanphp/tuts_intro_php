@@ -174,4 +174,86 @@ In main.php we can print out a friendly message.
 		</div>
 	<?php endif; ?>
 
-11. 
+Sessions refactoring
+======================
+1. As seen previously, we had a login page which contains a login form submitting to itself. If the form is posted, and the entered credentials are correct (hardcoded credentials are defined as constants), we are redirected to the main page, after the username session attribute is set. 
+Note this session attribute is saved on the server, but a cookie is set in the browser (PHPSESSIONID: mv0muubc4tjp219qq6cgrhn0j1).
+In the page page we have a logout button which redirects the user to the logout.php page where the session is destroyed and the $_SESSION superglobal is reset. We are then redirected to the login page. Now we want to refactor our code.
+
+2. In the main.php file, we can see that if the $_SESSION["username"] session variable is not set, we are redirected to the login page using header("Location: login.php");
+The code is as follows:
+<?php
+	session_start();
+	if(!isset($_SESSION["username"])) {
+		header("Location: login.php");
+		die();
+	}
+?>
+*** Main Page HTML goes here ***
+
+As we will be using the isset($_SESSION("username")) check in several parts of our app, it will be a good practice to extract it into a function. We hence create a functions file.
+<?php
+	function is_logged_in() {
+		return isset($_SESSION["username"]);
+	}
+
+3. We can also refactor our login page.
+
+We can create a config.php file where we can define constants that our application will use. For example our hardcoded credentials, BASE_URL or database connection URL.
+<?php
+	define("USER_NAME", "yovan.juggoo@gmail.com");
+	define("PASSWORD", "1234")
+
+4. We then abstract the user authentication mechanism of our login.php file into the is_valid_user($username, $password) function and hence we should include the functions.php.
+
+Cookies
+=========
+Cookies can store up to 4kb of data. They are easily editted so we must not store sensible data inside them.
+Casual user data can be stored in them, like fonts preferences, user preferred categories etc.
+
+We create a cookie by using the setcookie(string $name [,string $value [, int $expire[, ....]]]) method.
+
+This method can take a lot of parameters - see reference on web.
+
+- The name parameter is the key of the cookie
+- the value is the value of the cookie
+- expire - the expiration date. If not specified, it uses the browser's session as the expiration date.
+etc...
+<?php
+	setcookie("fontSize", 16);
+If we run the code and inspect elements in Application/Cookies we can see that we successfully set the value of our cookie.
+
+Note: We don't have access right away to our cookie variable, despite the fact that we have defined it. 
+To test it we can delete the cookie and reset it.
+The code below will notify an error:
+<? php
+setcookie("fontSize", 16);
+echo $_COOKIE["fontSize"]; //This line will throw an error: Notice: Undefined index: fontSize in C:\wamp\www\tuts_intro_php\02_super_globals\005-cookies\cookies.php on line 3
+
+This is because when we first set the cookie, it has not yet been sent to the server, hence accessessing it will throw an error.
+If we reload our page, the cookie is sent to the server, and when it comes back the value is set in the $_COOKIE superglobal and hence the echo works.
+
+We can use the value of the fontSize cookie variable to style our HTML.
+
+In DevTools we can see that the lifetime of our cookie is set to Session, i.e the session of the browser.
+
+setcookie($name, $value, $expiration_date_in_seconds); For example to define a cookie expiring in a year as from now, we must add the current time to the number of seconds in a year:
+setcookie("fontSize", 25, time() + 60 * 60 * 24 * 365); 
+
+There are no methods to delete a cookie. To delete a cookie, we set the expiration time in the past.
+setcookie("fontSize", 25, time() - (60 * 30)); // If we run this code, we can see in DevTools that the cookie is no longer there.
+
+We can access our cookie as an array. For example if we want to set user preferences, we can define and access the preferences as an array:
+setcookie("pref[fontSize]", 25);
+setcookie("pref[favoriteCategory]", 25);
+setcookie("pref[screenWidth]", 25);
+
+
+
+
+
+
+
+
+
+
